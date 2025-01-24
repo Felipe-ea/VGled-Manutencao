@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VG Manutenção em Painéis de LED</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0B0B45;
+            --secondary-color: #1E3D59;
+            --accent-color: #00A8E8;
+            --dark-gray: #2C3E50;
+            --light-gray: #ECF0F1;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--dark-gray);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            min-height: 100vh;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="%23ffffff20"/></svg>') repeat;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .navbar {
+            background-color: transparent !important;
+            transition: background-color 0.3s;
+        }
+
+        .navbar.scrolled {
+            background-color: var(--primary-color) !important;
+        }
+
+        .service-card {
+            border: none;
+            transition: transform 0.3s;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .counter-section {
+            background: var(--secondary-color);
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .counter-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 80vh;
+            }
+            
+            .service-card {
+                margin-bottom: 2rem;
+            }
+            
+            .counter-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">VG Manutenção</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#servicos">Serviços</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sobre">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">Portfólio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#depoimentos">Depoimentos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section d-flex align-items-center">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Manutenção Profissional em Painéis de LED</h1>
+                    <p class="lead mb-4">Garantimos o melhor desempenho para seus painéis LED com nossa expertise técnica e atendimento personalizado.</p>
+                    <a href="#contato" class="btn btn-light btn-lg">Solicitar Orçamento</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="servicos" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Nossos Serviços</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="service-card h-100 p-4">
+                        <i class="fas fa-building fa-3x mb-4 text-primary"></i>
+                        <h3>Manutenção Indoor</h3>
+                        <p>Especialistas em manutenção de painéis LED internos, garantindo qualidade de imagem e durabilidade para seu investimento.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Diagnóstico preciso</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Reparo especializado</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Manutenção preventiva</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="service-card h-100 p-4">
+                        <i class="fas fa-sign fa-3x mb-4 text-primary"></i>
+                        <h3>Manutenção Outdoor</h3>
+                        <p>Soluções completas para painéis LED externos, com foco em resistência às intempéries e máxima performance.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Proteção contra intempéries</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Calibração profissional</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Monitoramento contínuo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Counter Section -->
+    <section class="counter-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="counter-value" data-count="500">0</div>
+                    <h4>Clientes Atendidos</h4>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="counter-value" data-count="1000">0</div>
+                    <h4>Projetos Realizados</h4>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="counter-value" data-count="98">0</div>
+                    <h4>Satisfação dos Clientes</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Nosso Portfólio</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div style="height: 200px; background-color: var(--light-gray);" class="d-flex align-items-center justify-content-center">
+                            <i class="fas fa-image fa-3x text-secondary"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Projeto 1</h5>
+                            <p class="card-text">Breve descrição do projeto e seus resultados.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adicione mais cards do portfolio conforme necessário -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="depoimentos" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Depoimentos</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-left fa-2x mb-3 text-primary"></i>
+                        <p class="mb-4">"Excelente serviço! A equipe da VG Manutenção foi extremamente profissional e eficiente na manutenção do nosso painel LED."</p>
+                        <div class="d-flex align-items-center">
+                            <div class="ms-3">
+                                <h5 class="mb-0">João Silva</h5>
+                                <small class="text-muted">Empresa ABC</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adicione mais depoimentos conforme necessário -->
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5511999999999" class="whatsapp-button" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.querySelector('.navbar').classList.add('scrolled');
+            } else {
+                document.querySelector('.navbar').classList.remove('scrolled');
+            }
+        });
+
+        // Counter animation
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.count);
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 16);
+        }
+
+        // Start counter animation when in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.counter-value').forEach(counter => {
+                        animateCounter(counter);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        observer.observe(document.querySelector('.counter-section'));
+    </script>
+</body>
+</html>
