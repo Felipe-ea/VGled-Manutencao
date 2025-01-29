@@ -15,17 +15,71 @@
             --light-gray: #ECF0F1;
         }
 
+        html, body {
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Segoe UI', sans-serif;
             color: var(--dark-gray);
         }
 
+        /* Navbar Styles */
+        .navbar {
+            background-color: var(--primary-color) !important;
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            color: white !important;
+            font-weight: 600;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            color: white !important;
+            padding: 0.8rem 1rem !important;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                position: fixed;
+                top: 64px; /* Altura da navbar */
+                left: 0;
+                right: 0;
+                background-color: var(--primary-color);
+                padding: 1rem;
+                z-index: 1000;
+            }
+
+            .navbar-nav {
+                background-color: var(--primary-color);
+            }
+
+            .nav-link {
+                text-align: center;
+                padding: 1rem !important;
+            }
+        }
+
+        /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            min-height: 100vh;
+            padding: 7rem 0 4rem;
+            min-height: 40vh;
             color: white;
             position: relative;
-            overflow: hidden;
+            display: flex;
+            align-items: center;
         }
 
         .hero-content {
@@ -33,57 +87,34 @@
             z-index: 2;
         }
 
-        .hero-section::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="%23ffffff20"/></svg>') repeat;
-            opacity: 0.1;
-            z-index: 1;
-        }
-
-        .navbar {
-            background-color: transparent !important;
-            transition: background-color 0.3s;
-        }
-
-        .navbar.scrolled {
-            background-color: var(--primary-color) !important;
-        }
-
+        /* Services Section */
         .service-card {
             border: none;
             transition: transform 0.3s;
             background: white;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 100%;
+            padding: 2rem;
         }
 
         .service-card:hover {
             transform: translateY(-10px);
         }
 
-        .counter-section {
-            background: var(--secondary-color);
-            color: white;
-            padding: 4rem 0;
+        /* Button Styles */
+        .btn-custom {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s;
         }
 
-        .counter-value {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-
-        .testimonial-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 1rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .btn-custom:hover {
+            background-color: var(--primary-color);
+            transform: scale(1.05);
         }
 
         .whatsapp-button {
@@ -102,6 +133,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             z-index: 1000;
             transition: transform 0.3s;
+            text-decoration: none;
         }
 
         .whatsapp-button:hover {
@@ -109,26 +141,39 @@
             color: white;
         }
 
-        @media (max-width: 768px) {
-            .hero-section {
-                min-height: 80vh;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-            
-            .service-card {
-                margin-bottom: 2rem;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-            
-            .counter-value {
-                font-size: 2rem;
-            }
+        }
+
+        .service-card {
+            opacity: 0; /* Começa invisível */
+        }
+
+        .service-card.animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Delay para o segundo card */
+        .service-card:nth-child(2) {
+            animation-delay: 0.2s;
         }
     </style>
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">VG Manutenção</a>
+            <a class="navbar-brand" href="#">
+                <img src="vgmanutencao.jpg" alt="VG Manutenção Logo">
+                VG Manutenção
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -140,28 +185,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#servicos">Serviços</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#sobre">Sobre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#portfolio">Portfólio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#depoimentos">Depoimentos</a>
-                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="inicio" class="hero-section d-flex align-items-center">
+    <section id="inicio" class="hero-section">
         <div class="container hero-content">
             <div class="row align-items-center">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <h1 class="display-4 fw-bold mb-4">Manutenção Profissional em Painéis de LED</h1>
-                    <p class="lead mb-4">Garantimos o melhor desempenho para seus painéis LED com nossa expertise técnica e atendimento personalizado.</p>
-                    <a href="#contato" class="btn btn-light btn-lg">Solicitar Orçamento</a>
+                    <p class="lead mb-4">A manutenção correta do painel de led é um ponto crucial que determina a visão das pessoas sobre ele.<br/><br/>
+                        Garantimos o melhor desempenho para seus painéis LED com nossa expertise técnica e atendimento personalizado.</p>
+                    <a href="https://wa.me/5562993093427" class="btn btn-custom ">Solicitar Orçamento</a>
                 </div>
             </div>
         </div>
@@ -173,11 +210,12 @@
             <h2 class="text-center mb-5">Nossos Serviços</h2>
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <div class="service-card h-100 p-4">
+                    <div class="service-card">
                         <i class="fas fa-building fa-3x mb-4 text-primary"></i>
                         <h3>Manutenção Indoor</h3>
-                        <p>Especialistas em manutenção de painéis LED internos, garantindo qualidade de imagem e durabilidade para seu investimento.</p>
-                        <ul class="list-unstyled">
+                        <p>Temporais como chuvas, sol ou até mesmo ventos que trazem poeira diretamente em seu painel de led podem danificar sua estrutura visual comprometendo componentes eletrônicos internos, trilhas e pixel ao ponto de atrapalhar o conteúdo que está sendo passado e diminuir a vida útil do mesmo.</p>
+                        <p>Ao fazer a manutenção corretiva e preventiva você proporciona uma boa visibilidade de imagem, conseguindo garantir uma boa credibilidade sobre seu painel de led.</p>
+                        <ul class="list-unstyled mt-4">
                             <li><i class="fas fa-check text-success me-2"></i>Diagnóstico preciso</li>
                             <li><i class="fas fa-check text-success me-2"></i>Reparo especializado</li>
                             <li><i class="fas fa-check text-success me-2"></i>Manutenção preventiva</li>
@@ -185,80 +223,18 @@
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                    <div class="service-card h-100 p-4">
+                    <div class="service-card">
                         <i class="fas fa-sign fa-3x mb-4 text-primary"></i>
                         <h3>Manutenção Outdoor</h3>
-                        <p>Soluções completas para painéis LED externos, com foco em resistência às intempéries e máxima performance.</p>
-                        <ul class="list-unstyled">
+                        <p>É um painel que precisa de cuidados minuciosos para não perder sua qualidade de imagem e vida útil, cuidados como troca de pixel queimado, troca de componentes e trilhas no decorrer do tempo são necessários garantir boa visibilidade sempre.</p>
+                        <p>A limpeza de maneira correta é essencial para prolongar sua vida útil e não danificar componentes internos e externos.</p>
+                        <ul class="list-unstyled mt-4">
                             <li><i class="fas fa-check text-success me-2"></i>Proteção contra intempéries</li>
                             <li><i class="fas fa-check text-success me-2"></i>Calibração profissional</li>
                             <li><i class="fas fa-check text-success me-2"></i>Monitoramento contínuo</li>
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Counter Section -->
-    <section class="counter-section">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-md-4 mb-4">
-                    <div class="counter-value" data-count="500">0</div>
-                    <h4>Clientes Atendidos</h4>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="counter-value" data-count="1000">0</div>
-                    <h4>Projetos Realizados</h4>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="counter-value" data-count="98">0</div>
-                    <h4>Satisfação dos Clientes</h4>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-5">Nosso Portfólio</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div style="height: 200px; background-color: var(--light-gray);" class="d-flex align-items-center justify-content-center">
-                            <i class="fas fa-image fa-3x text-secondary"></i>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Projeto 1</h5>
-                            <p class="card-text">Breve descrição do projeto e seus resultados.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Adicione mais cards do portfolio conforme necessário -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="depoimentos" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">Depoimentos</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="testimonial-card">
-                        <i class="fas fa-quote-left fa-2x mb-3 text-primary"></i>
-                        <p class="mb-4">"Excelente serviço! A equipe da VG Manutenção foi extremamente profissional e eficiente na manutenção do nosso painel LED."</p>
-                        <div class="d-flex align-items-center">
-                            <div class="ms-3">
-                                <h5 class="mb-0">João Silva</h5>
-                                <small class="text-muted">Empresa ABC</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Adicione mais depoimentos conforme necessário -->
             </div>
         </div>
     </section>
@@ -271,45 +247,23 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                document.querySelector('.navbar').classList.add('scrolled');
-            } else {
-                document.querySelector('.navbar').classList.remove('scrolled');
-            }
-        });
-
-        // Counter animation
-        function animateCounter(element) {
-            const target = parseInt(element.dataset.count);
-            const duration = 2000;
-            const step = target / (duration / 16);
-            let current = 0;
-
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                element.textContent = Math.floor(current);
-            }, 16);
-        }
-
-        // Start counter animation when in view
-        const observer = new IntersectionObserver((entries) => {
+        // Observer para os cards de serviço
+        const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.counter-value').forEach(counter => {
-                        animateCounter(counter);
-                    });
-                    observer.unobserve(entry.target);
+                    entry.target.classList.add('animate');
+                    fadeObserver.unobserve(entry.target);
                 }
             });
+        }, {
+            threshold: 0.1,
+            rootMargin: '50px'
         });
-
-        observer.observe(document.querySelector('.counter-section'));
+    
+        // Observa todos os service-cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            fadeObserver.observe(card);
+        });
     </script>
 </body>
 </html>
