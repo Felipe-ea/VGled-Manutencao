@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VG Manutenção em Painéis de LED</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0B0B45;
+            --secondary-color: #1E3D59;
+            --accent-color: #00A8E8;
+            --dark-gray: #2C3E50;
+            --light-gray: #ECF0F1;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--dark-gray);
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: var(--primary-color) !important;
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            color: white !important;
+            font-weight: 600;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            color: white !important;
+            padding: 0.8rem 1rem !important;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                position: fixed;
+                top: 64px; /* Altura da navbar */
+                left: 0;
+                right: 0;
+                background-color: var(--primary-color);
+                padding: 1rem;
+                z-index: 1000;
+            }
+
+            .navbar-nav {
+                background-color: var(--primary-color);
+            }
+
+            .nav-link {
+                text-align: center;
+                padding: 1rem !important;
+            }
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 7rem 0 4rem;
+            min-height: 40vh;
+            color: white;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Services Section */
+        .service-card {
+            border: none;
+            transition: transform 0.3s;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 100%;
+            padding: 2rem;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Button Styles */
+        .btn-custom {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .btn-custom:hover {
+            background-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-card {
+            opacity: 0; /* Começa invisível */
+        }
+
+        .service-card.animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Delay para o segundo card */
+        .service-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="vgmanutencao.jpg" alt="VG Manutenção Logo">
+                VG Manutenção
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#servicos">Serviços</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <h1 class="display-4 fw-bold mb-4">Manutenção Profissional em Painéis de LED</h1>
+                    <p class="lead mb-4">A manutenção correta do painel de led é um ponto crucial que determina a visão das pessoas sobre ele.<br/><br/>
+                        Garantimos o melhor desempenho para seus painéis LED com nossa expertise técnica e atendimento personalizado.</p>
+                    <a href="https://api.whatsapp.com/send/?phone=5562993093427&text=Ol%C3%A1+gostaria+de+saber+sobre+a+manuten%C3%A7%C3%A3o.+&type=phone_number&app_absent=0" class="btn btn-custom ">Solicitar Orçamento</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="servicos" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Nossos Serviços</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="service-card">
+                        <i class="fas fa-building fa-3x mb-4 text-primary"></i>
+                        <h3>Manutenção Indoor</h3>
+                        <p>Temporais como chuvas, sol ou até mesmo ventos que trazem poeira diretamente em seu painel de led podem danificar sua estrutura visual comprometendo componentes eletrônicos internos, trilhas e pixel ao ponto de atrapalhar o conteúdo que está sendo passado e diminuir a vida útil do mesmo.</p>
+                        <p>Ao fazer a manutenção corretiva e preventiva você proporciona uma boa visibilidade de imagem, conseguindo garantir uma boa credibilidade sobre seu painel de led.</p>
+                        <ul class="list-unstyled mt-4">
+                            <li><i class="fas fa-check text-success me-2"></i>Diagnóstico preciso</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Reparo especializado</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Manutenção preventiva</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="service-card">
+                        <i class="fas fa-sign fa-3x mb-4 text-primary"></i>
+                        <h3>Manutenção Outdoor</h3>
+                        <p>É um painel que precisa de cuidados minuciosos para não perder sua qualidade de imagem e vida útil, cuidados como troca de pixel queimado, troca de componentes e trilhas no decorrer do tempo são necessários garantir boa visibilidade sempre.</p>
+                        <p>A limpeza de maneira correta é essencial para prolongar sua vida útil e não danificar componentes internos e externos.</p>
+                        <ul class="list-unstyled mt-4">
+                            <li><i class="fas fa-check text-success me-2"></i>Proteção contra intempéries</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Calibração profissional</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Monitoramento contínuo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Button -->
+    <a href="https://api.whatsapp.com/send/?phone=5562993093427&text=Ol%C3%A1+gostaria+de+saber+sobre+a+manuten%C3%A7%C3%A3o.+&type=phone_number&app_absent=0" class="whatsapp-button" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Observer para os cards de serviço
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '50px'
+        });
+    
+        // Observa todos os service-cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            fadeObserver.observe(card);
+        });
+    </script>
+</body>
+</html>
