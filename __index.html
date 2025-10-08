@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes"
+    />
+    <title>VG Manutenção em Painéis de LED</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #0b0b45;
+        --secondary: #1e3d59;
+        --accent: #00a8e8;
+        --accent-light: #33b8ed;
+        --dark: #2c3e50;
+        --light: #f8f9fa;
+        --success: #25d366;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--dark);
+        overflow-x: hidden;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Improve mobile performance */
+      .hero,
+      .stats,
+      .services,
+      .process,
+      .benefits,
+      .cta {
+        will-change: transform;
+        backface-visibility: hidden;
+      }
+
+      /* Navbar */
+      .navbar {
+        background: rgba(11, 11, 69, 0.98);
+        backdrop-filter: blur(15px);
+        padding: 1rem 0;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar.scrolled {
+        padding: 0.7rem 0;
+        box-shadow: 0 4px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        color: white !important;
+        font-weight: 700;
+        font-size: 1.5rem;
+        transition: transform 0.3s ease;
+        letter-spacing: -0.5px;
+      }
+
+      .navbar-brand:hover {
+        transform: translateX(5px);
+      }
+
+      /* Mobile-friendly navbar toggler */
+      .navbar-toggler {
+        border: none;
+        padding: 0.6rem;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        min-width: 48px;
+        min-height: 48px;
+      }
+
+      .navbar-toggler:focus {
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+        outline: none;
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .navbar-toggler:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        filter: invert(1);
+      }
+
+      .navbar-brand img {
+        height: 50px;
+        margin-right: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .nav-link {
+        color: rgba(255, 255, 255, 0.85) !important;
+        padding: 0.6rem 1.3rem !important;
+        font-weight: 500;
+        position: relative;
+        transition: all 0.3s ease;
+        font-size: 1.05rem;
+      }
+
+      .nav-link::before {
+        content: "";
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        width: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateX(-50%);
+        border-radius: 2px;
+      }
+
+      .nav-link:hover::before {
+        width: 70%;
+      }
+
+      .nav-link:hover {
+        color: white !important;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(
+          145deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        padding: 160px 0 120px;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(0, 168, 232, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(30, 61, 89, 0.1) 0%,
+            transparent 50%
+          );
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.2rem, 6vw, 4rem);
+        font-weight: 800;
+        color: white;
+        margin-bottom: 1.8rem;
+        line-height: 1.15;
+        letter-spacing: -1px;
+      }
+
+      .hero p {
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        color: rgba(255, 255, 255, 0.92);
+        margin-bottom: 3rem;
+        line-height: 1.8;
+        max-width: 800px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+      }
+
+      .btn-hero-primary {
+        background: white;
+        color: var(--primary);
+        padding: 1.1rem 2.8rem;
+        border-radius: 60px;
+        font-weight: 700;
+        border: none;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1.05rem;
+      }
+
+      .btn-hero-primary:hover,
+      .btn-hero-primary:focus {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        background: var(--accent);
+        color: white;
+        outline: none;
+      }
+
+      .btn-hero-primary:active {
+        transform: translateY(-2px);
+        transition: transform 0.1s ease;
+      }
+
+      .btn-hero-secondary {
+        background: transparent;
+        color: white;
+        padding: 1.1rem 2.8rem;
+        border-radius: 60px;
+        font-weight: 600;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        display: inline-block;
+        backdrop-filter: blur(10px);
+        font-size: 1.05rem;
+      }
+
+      .btn-hero-secondary:hover,
+      .btn-hero-secondary:focus {
+        background: white;
+        color: var(--primary);
+        border-color: white;
+        transform: translateY(-4px);
+        outline: none;
+      }
+
+      .btn-hero-secondary:active {
+        transform: translateY(-2px);
+        transition: transform 0.1s ease;
+      }
+
+      /* Touch-friendly improvements for mobile */
+      @media (hover: none) and (pointer: coarse) {
+        .btn-hero-primary:hover,
+        .btn-hero-secondary:hover,
+        .navbar-brand:hover {
+          transform: none;
+        }
+
+        .btn-hero-primary:active,
+        .btn-hero-secondary:active {
+          transform: scale(0.98);
+          transition: transform 0.1s ease;
+        }
+
+        /* Increase tap target size on mobile */
+        .nav-link {
+          min-height: 48px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      /* Stats */
+      .stats {
+        background: var(--light);
+        padding: 90px 0;
+        position: relative;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 2.5rem 1.5rem;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .stat-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .stat-number {
+        font-size: 3.5rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--accent), var(--accent-light));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.8rem;
+        line-height: 1;
+      }
+
+      .stat-label {
+        font-size: 1.15rem;
+        color: var(--dark);
+        font-weight: 600;
+        opacity: 0.85;
+      }
+
+      /* Services */
+      .services {
+        padding: 110px 0;
+        background: white;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 5rem;
+      }
+
+      .section-title {
+        font-size: clamp(2.2rem, 5vw, 3.2rem);
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 1.2rem;
+        letter-spacing: -1px;
+      }
+
+      .section-subtitle {
+        font-size: 1.2rem;
+        color: var(--dark);
+        opacity: 0.75;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.7;
+      }
+
+      .service-card {
+        background: white;
+        border-radius: 24px;
+        padding: 3.5rem 2.5rem;
+        height: 100%;
+        box-shadow: 0 15px 60px rgba(0, 0, 0, 0.06);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        transform: translateY(40px);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        transform: scaleX(0);
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .service-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .service-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .service-card:hover {
+        transform: translateY(-20px);
+        box-shadow: 0 25px 80px rgba(0, 168, 232, 0.12);
+      }
+
+      .service-icon {
+        width: 90px;
+        height: 90px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-light));
+        border-radius: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 30px rgba(0, 168, 232, 0.25);
+      }
+
+      .service-card:hover .service-icon {
+        transform: rotate(-5deg) scale(1.08);
+        box-shadow: 0 15px 40px rgba(0, 168, 232, 0.35);
+      }
+
+      .service-icon i {
+        font-size: 2.8rem;
+        color: white;
+      }
+
+      .service-card h3 {
+        font-size: 1.75rem;
+        font-weight: 800;
+        margin-bottom: 1.3rem;
+        color: var(--primary);
+        letter-spacing: -0.5px;
+      }
+
+      .service-card p {
+        color: var(--dark);
+        opacity: 0.8;
+        line-height: 1.9;
+        margin-bottom: 1.3rem;
+        font-size: 1.05rem;
+      }
+
+      .service-features {
+        list-style: none;
+        padding: 0;
+        margin-top: 2rem;
+      }
+
+      .service-features li {
+        padding: 0.8rem 0;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.05rem;
+        opacity: 0.85;
+      }
+
+      .service-features i {
+        color: var(--success);
+        font-size: 1.3rem;
+        flex-shrink: 0;
+      }
+
+      /* Process */
+      .process {
+        padding: 110px 0;
+        background: var(--light);
+      }
+
+      .process-step {
+        text-align: center;
+        padding: 2rem 1.5rem;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .process-step.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .process-number {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-light));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: white;
+        margin: 0 auto 1.8rem;
+        box-shadow: 0 15px 40px rgba(0, 168, 232, 0.3);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .process-step:hover .process-number {
+        transform: scale(1.15) rotate(10deg);
+        box-shadow: 0 20px 50px rgba(0, 168, 232, 0.4);
+      }
+
+      .process-step h4 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+
+      .process-step p {
+        color: var(--dark);
+        opacity: 0.8;
+        line-height: 1.8;
+        font-size: 1.05rem;
+      }
+
+      /* Benefits */
+      .benefits {
+        padding: 110px 0;
+        background: white;
+      }
+
+      .benefit-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.8rem;
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        background: var(--light);
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        transform: translateX(-40px);
+        border: 1px solid rgba(0, 0, 0, 0.03);
+      }
+
+      .benefit-card.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .benefit-card:hover {
+        transform: translateX(15px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+        background: white;
+      }
+
+      .benefit-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-light));
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 10px 30px rgba(0, 168, 232, 0.25);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .benefit-card:hover .benefit-icon {
+        transform: scale(1.1) rotate(-5deg);
+      }
+
+      .benefit-icon i {
+        font-size: 2rem;
+        color: white;
+      }
+
+      .benefit-content h4 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.7rem;
+        color: var(--primary);
+      }
+
+      .benefit-content p {
+        color: var(--dark);
+        opacity: 0.8;
+        margin: 0;
+        line-height: 1.8;
+        font-size: 1.05rem;
+      }
+
+      /* CTA */
+      .cta {
+        background: linear-gradient(
+          145deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        padding: 100px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 30% 50%,
+            rgba(0, 168, 232, 0.15) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle at 70% 50%,
+            rgba(51, 184, 237, 0.1) 0%,
+            transparent 60%
+          );
+      }
+
+      .cta-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .cta h2 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 800;
+        color: white;
+        margin-bottom: 1.5rem;
+        letter-spacing: -1px;
+      }
+
+      .cta p {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 3rem;
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.7;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--primary);
+        color: white;
+        padding: 50px 0 25px;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2.5rem;
+        margin-bottom: 2.5rem;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+      }
+
+      .footer-logo img {
+        height: 55px;
+        border-radius: 10px;
+      }
+
+      .footer-logo h3 {
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin: 0;
+      }
+
+      .footer-contact a {
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: none;
+        font-size: 1.15rem;
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        transition: all 0.3s ease;
+      }
+
+      .footer-contact a:hover {
+        color: var(--accent);
+        transform: translateX(5px);
+      }
+
+      .footer-contact i {
+        font-size: 1.4rem;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.95rem;
+      }
+
+      /* WhatsApp Button */
+      .whatsapp-btn {
+        position: fixed;
+        bottom: 35px;
+        right: 35px;
+        background: var(--success);
+        color: white;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.2rem;
+        box-shadow: 0 8px 35px rgba(37, 211, 102, 0.4);
+        z-index: 1000;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        animation: pulse 2.5s infinite;
+      }
+
+      .whatsapp-btn:hover {
+        transform: scale(1.18);
+        box-shadow: 0 12px 50px rgba(37, 211, 102, 0.6);
+        color: white;
+      }
+
+      .whatsapp-btn:active {
+        transform: scale(1.1);
+        transition: transform 0.1s ease;
+      }
+
+      /* Mobile-specific WhatsApp button improvements */
+      @media (hover: none) and (pointer: coarse) {
+        .whatsapp-btn:hover {
+          transform: none;
+        }
+
+        .whatsapp-btn:active {
+          transform: scale(0.95);
+          transition: transform 0.1s ease;
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 8px 35px rgba(37, 211, 102, 0.4);
+        }
+        50% {
+          box-shadow: 0 8px 50px rgba(37, 211, 102, 0.7);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 991px) {
+        .navbar-collapse {
+          background: rgba(11, 11, 69, 0.98);
+          backdrop-filter: blur(20px);
+          padding: 1.5rem;
+          margin-top: 1rem;
+          border-radius: 15px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+          text-align: center;
+          padding: 1rem !important;
+          font-size: 1.1rem;
+          margin: 0.2rem 0;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hero {
+          padding: 140px 0 90px;
+          min-height: 80vh;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .hero-buttons a {
+          width: 100%;
+          text-align: center;
+          padding: 1.2rem 2rem;
+          font-size: 1.1rem;
+        }
+
+        .stats,
+        .services,
+        .process,
+        .benefits,
+        .cta {
+          padding: 70px 0;
+        }
+
+        .section-header {
+          margin-bottom: 3.5rem;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          text-align: center;
+          gap: 2rem;
+        }
+
+        .footer-contact a {
+          justify-content: center;
+        }
+
+        .whatsapp-btn {
+          width: 60px;
+          height: 60px;
+          font-size: 1.9rem;
+          bottom: 25px;
+          right: 25px;
+        }
+      }
+
+      /* Melhorias para dispositivos mobile */
+      @media (max-width: 768px) {
+        .navbar-brand {
+          font-size: 1.4rem;
+        }
+
+        .navbar-brand img {
+          width: 45px;
+          height: 45px;
+        }
+
+        .hero {
+          padding: 120px 0 80px;
+        }
+
+        .hero h1 {
+          font-size: clamp(1.8rem, 8vw, 3.2rem);
+          margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+          font-size: clamp(1rem, 4vw, 1.2rem);
+          margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+          font-size: 2.2rem;
+        }
+
+        .section-subtitle {
+          font-size: 1.1rem;
+        }
+
+        .service-card,
+        .benefit-card {
+          padding: 2.5rem 2rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .process-step {
+          padding: 2rem 1.5rem;
+        }
+
+        .container {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .navbar-brand {
+          font-size: 1.2rem;
+        }
+
+        .navbar-brand img {
+          width: 40px;
+          height: 40px;
+        }
+
+        .hero {
+          padding: 100px 0 60px;
+          min-height: 70vh;
+        }
+
+        .hero h1 {
+          font-size: clamp(1.6rem, 9vw, 2.8rem);
+          margin-bottom: 1.2rem;
+          line-height: 1.2;
+        }
+
+        .hero p {
+          font-size: clamp(0.95rem, 4.5vw, 1.15rem);
+          margin-bottom: 2rem;
+          padding: 0 0.5rem;
+        }
+
+        .hero-buttons {
+          padding: 0 0.5rem;
+        }
+
+        .hero-buttons a {
+          padding: 1rem 1.5rem;
+          font-size: 1rem;
+          min-height: 50px;
+          border-radius: 50px;
+        }
+
+        .stats,
+        .services,
+        .process,
+        .benefits,
+        .cta {
+          padding: 50px 0;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+          margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+          font-size: 1rem;
+          margin-bottom: 2rem;
+        }
+
+        .section-header {
+          margin-bottom: 2.5rem;
+          padding: 0 1rem;
+        }
+
+        .service-card,
+        .benefit-card {
+          padding: 2rem 1.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .service-card h3,
+        .benefit-card h3 {
+          font-size: 1.4rem;
+          margin-bottom: 1rem;
+        }
+
+        .service-card p,
+        .benefit-card p {
+          font-size: 0.95rem;
+          line-height: 1.6;
+        }
+
+        .stat-item {
+          margin-bottom: 2rem;
+        }
+
+        .stat-number {
+          font-size: 2.5rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+          font-size: 0.9rem;
+        }
+
+        .service-icon,
+        .benefit-icon {
+          width: 60px;
+          height: 60px;
+          margin-bottom: 1.5rem;
+        }
+
+        .service-icon i,
+        .benefit-icon i {
+          font-size: 1.6rem;
+        }
+
+        .process-step {
+          padding: 1.5rem 1rem;
+          margin-bottom: 1rem;
+        }
+
+        .process-step h3 {
+          font-size: 1.3rem;
+        }
+
+        .whatsapp-btn {
+          width: 55px;
+          height: 55px;
+          font-size: 1.6rem;
+          bottom: 20px;
+          right: 20px;
+        }
+
+        .footer-content {
+          padding: 0 1rem;
+        }
+
+        .footer-contact a {
+          font-size: 0.9rem;
+          padding: 0.8rem 0;
+        }
+      }
+
+      /* Extra pequenas telas (< 480px) */
+      @media (max-width: 480px) {
+        .container {
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
+        }
+
+        .hero h1 {
+          font-size: clamp(1.4rem, 10vw, 2.4rem);
+        }
+
+        .hero p {
+          font-size: clamp(0.9rem, 5vw, 1.1rem);
+        }
+
+        .section-title {
+          font-size: 1.6rem;
+        }
+
+        .service-card,
+        .benefit-card {
+          padding: 1.5rem 1rem;
+        }
+
+        .whatsapp-btn {
+          width: 50px;
+          height: 50px;
+          font-size: 1.4rem;
+          bottom: 15px;
+          right: 15px;
+        }
+      }
+
+      /* iOS Safari específico */
+      @supports (-webkit-touch-callout: none) {
+        .hero {
+          min-height: -webkit-fill-available;
+        }
+
+        .navbar {
+          -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+        }
+      }
+
+      /* Melhorias para scroll suave em mobile */
+      @media (max-width: 768px) {
+        html {
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .navbar-collapse.show {
+          animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      }
+
+      /* Gradient header text */
+      .gradient-text {
+        background: linear-gradient(
+          135deg,
+          #00e5ff 0%,
+          #3f51b5 25%,
+          #57b2d3 50%,
+          #3b39b6 75%,
+          #8aabb6 100%
+        );
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradientShift 6s ease-in-out infinite;
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      @keyframes gradientShift {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#inicio">
+          <img
+            style="
+              margin: 0;
+              padding: 0;
+              margin-right: 5px;
+              width: 40px;
+              height: 40px;
+              border-radius: 10px;
+            "
+            src="logo.png"
+            alt="VG Manutenção Logo"
+          />
+          <span style="font-size: 25px" class="gradient-text"
+            >VG Manutenção</span
+          >
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#inicio">Início</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#servicos">Serviços</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#processo">Processo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#beneficios">Benefícios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contato">Contato</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="inicio" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Manutenção Profissional em Painéis de LED</h1>
+          <p>
+            Garantimos máximo desempenho e durabilidade para seus painéis LED
+            com expertise técnica, atendimento personalizado e soluções
+            completas de manutenção preventiva e corretiva.
+          </p>
+          <div class="hero-buttons">
+            <a
+              href="https://api.whatsapp.com/send/?phone=5562993093427&text=Ol%C3%A1%21+Gostaria+de+solicitar+um+or%C3%A7amento+para+manuten%C3%A7%C3%A3o.&type=phone_number&app_absent=0"
+              class="btn-hero-primary"
+              >Solicitar Orçamento</a
+            >
+            <a href="#servicos" class="btn-hero-secondary">Conhecer Serviços</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <!--
+    <section class="stats">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-4 mb-md-0">
+            <div class="stat-item">
+              <div class="stat-number" data-target="100">0</div>
+              <div class="stat-label">Painéis Atendidos</div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4 mb-md-0">
+            <div class="stat-item">
+              <div class="stat-number" data-target="98">0</div>
+              <div class="stat-label">Taxa de Satisfação</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="stat-item">
+              <div class="stat-number" data-target="24">0</div>
+              <div class="stat-label">Atendimento em 24h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    -->
+
+    <!-- Services -->
+    <section id="servicos" class="services">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Nossos Serviços</h2>
+          <p class="section-subtitle">
+            Soluções completas e especializadas para manter seus painéis LED
+            sempre com performance máxima
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-building"></i>
+              </div>
+              <h3>Manutenção Indoor</h3>
+              <p>
+                Painéis indoor exigem cuidados especiais para manter qualidade
+                visual impecável. Poeira, umidade e desgaste natural podem
+                comprometer componentes eletrônicos, trilhas e pixels.
+              </p>
+              <p>
+                Nossa manutenção corretiva e preventiva garante visibilidade
+                perfeita, prolongando significativamente a vida útil do seu
+                investimento.
+              </p>
+              <ul class="service-features">
+                <li>
+                  <i class="fas fa-check-circle"></i> Diagnóstico técnico
+                  preciso
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Reparo especializado de
+                  componentes
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Manutenção preventiva
+                  programada
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Limpeza profissional
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-4">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-sun"></i>
+              </div>
+              <h3>Manutenção Outdoor</h3>
+              <p>
+                Painéis outdoor enfrentam condições climáticas severas. Chuvas,
+                sol intenso e ventos com poeira podem danificar estrutura visual
+                e componentes internos, comprometendo o conteúdo exibido.
+              </p>
+              <p>
+                Realizamos troca de pixels, componentes e trilhas, além de
+                limpeza técnica para garantir durabilidade e excelência visual
+                contínua.
+              </p>
+              <ul class="service-features">
+                <li>
+                  <i class="fas fa-check-circle"></i> Proteção contra
+                  intempéries
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Calibração profissional
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Monitoramento preventivo
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Reparos emergenciais
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section id="processo" class="process">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Como Funciona</h2>
+          <p class="section-subtitle">
+            Processo simples e eficiente para garantir a melhor manutenção
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-4">
+            <div class="process-step">
+              <div class="process-number">1</div>
+              <h4>Contato</h4>
+              <p>
+                Entre em contato via WhatsApp e descreva a situação do seu
+                painel
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3 mb-4">
+            <div class="process-step">
+              <div class="process-number">2</div>
+              <h4>Diagnóstico</h4>
+              <p>
+                Realizamos análise técnica completa para identificar todas as
+                necessidades
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3 mb-4">
+            <div class="process-step">
+              <div class="process-number">3</div>
+              <h4>Orçamento</h4>
+              <p>
+                Apresentamos proposta detalhada e transparente para aprovação
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3 mb-4">
+            <div class="process-step">
+              <div class="process-number">4</div>
+              <h4>Manutenção</h4>
+              <p>Executamos o serviço com qualidade e eficiência garantidas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section id="beneficios" class="benefits">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Por Que Escolher a VG Manutenção</h2>
+          <p class="section-subtitle">
+            Diferenciais que fazem toda a diferença no cuidado com seus painéis
+            LED
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 mb-3">
+            <div class="benefit-card">
+              <div class="benefit-icon">
+                <i class="fas fa-award"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Expertise Técnica</h4>
+                <p>
+                  Equipe altamente qualificada com anos de experiência em
+                  manutenção de painéis LED de todos os tipos e marcas.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="benefit-card">
+              <div class="benefit-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Atendimento Ágil</h4>
+                <p>
+                  Resposta rápida e atendimento eficiente para minimizar o tempo
+                  de inatividade dos seus painéis.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="benefit-card">
+              <div class="benefit-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Garantia de Qualidade</h4>
+                <p>
+                  Todos os serviços realizados com peças de qualidade e garantia
+                  nos reparos executados.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="benefit-card">
+              <div class="benefit-icon">
+                <i class="fas fa-hand-holding-usd"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Custo-Benefício</h4>
+                <p>
+                  Preços justos e competitivos com transparência total em todos
+                  os orçamentos apresentados.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contato" class="cta">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Pronto para Garantir a Melhor Performance?</h2>
+          <p>
+            Entre em contato agora e solicite um orçamento sem compromisso.
+            Nossa equipe está pronta para atender você!
+          </p>
+          <a
+            href="https://api.whatsapp.com/send/?phone=5562993093427&text=Ol%C3%A1%21+Gostaria+de+solicitar+um+or%C3%A7amento+para+manuten%C3%A7%C3%A3o.&type=phone_number&app_absent=0"
+            class="btn-hero-primary"
+            >Falar no WhatsApp</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <img src="logo.png" alt="VG Manutenção" />
+            <h3 class="gradient-text">VG Manutenção</h3>
+          </div>
+          <div class="footer-contact">
+            <a
+              href="https://api.whatsapp.com/send/?phone=5562993093427&text=Ol%C3%A1%21+Gostaria+de+solicitar+um+or%C3%A7amento+para+manuten%C3%A7%C3%A3o.&type=phone_number&app_absent=0"
+              target="_blank"
+            >
+              <i class="fab fa-whatsapp"></i> (62) 99309-3427
+            </a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2025 VG Manutenção em Painéis de LED. Todos os direitos
+            reservados.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a
+      href="https://api.whatsapp.com/send/?phone=5562993093427&text=Ol%C3%A1%21+Gostaria+de+solicitar+um+or%C3%A7amento+para+manuten%C3%A7%C3%A3o.&type=phone_number&app_absent=0"
+      class="whatsapp-btn"
+      target="_blank"
+      aria-label="Falar no WhatsApp"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Navbar scroll effect
+      const navbar = document.querySelector(".navbar");
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 50);
+      });
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -80px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe animated elements
+      document
+        .querySelectorAll(
+          ".service-card, .stat-item, .process-step, .benefit-card"
+        )
+        .forEach((el) => {
+          observer.observe(el);
+        });
+
+      // Counter animation for stats
+      const animateCounter = (element, target, suffix = "+") => {
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            element.textContent = target + suffix;
+            clearInterval(timer);
+          } else {
+            element.textContent = Math.floor(current) + suffix;
+          }
+        }, 16);
+      };
+
+      // Stats counter observer
+      const statsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (
+              entry.isIntersecting &&
+              !entry.target.classList.contains("counted")
+            ) {
+              const number = entry.target.querySelector(".stat-number");
+              const target = parseInt(number.getAttribute("data-target"));
+              const label =
+                entry.target.querySelector(".stat-label").textContent;
+              const suffix = label.includes("Satisfação")
+                ? "%"
+                : label.includes("24h")
+                ? "h"
+                : "+";
+              animateCounter(number, target, suffix);
+              entry.target.classList.add("counted");
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      document.querySelectorAll(".stat-item").forEach((card) => {
+        statsObserver.observe(card);
+      });
+
+      // Smooth scroll for navigation
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            const offset = navbar.offsetHeight;
+            const targetPosition = target.offsetTop - offset;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+
+            // Close mobile menu
+            const navbarCollapse = document.querySelector(".navbar-collapse");
+            if (navbarCollapse.classList.contains("show")) {
+              const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+              if (bsCollapse) bsCollapse.hide();
+            }
+          }
+        });
+      });
+
+      // Stagger animation delays
+      document.querySelectorAll(".service-card").forEach((card, i) => {
+        card.style.transitionDelay = `${i * 0.15}s`;
+      });
+
+      document.querySelectorAll(".process-step").forEach((step, i) => {
+        step.style.transitionDelay = `${i * 0.12}s`;
+      });
+
+      document.querySelectorAll(".benefit-card").forEach((item, i) => {
+        item.style.transitionDelay = `${i * 0.1}s`;
+      });
+
+      document.querySelectorAll(".stat-item").forEach((card, i) => {
+        card.style.transitionDelay = `${i * 0.15}s`;
+      });
+    </script>
+  </body>
+</html>
