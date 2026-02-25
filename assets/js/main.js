@@ -170,4 +170,33 @@ document.addEventListener("DOMContentLoaded", () => {
         collapse.closest(".accordion-item")?.classList.add("is-open"),
       );
   }
+
+  /* ── Toggle de tema claro / escuro ── */
+  const htmlEl = document.documentElement;
+  const themeToggleDesktop = document.getElementById("theme-toggle");
+  const themeToggleMobile = document.getElementById("theme-toggle-mobile");
+  const iconDesktop = document.getElementById("theme-icon-desktop");
+  const iconMobile = document.getElementById("theme-icon-mobile");
+
+  const applyTheme = (theme) => {
+    htmlEl.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+
+    const isLight = theme === "light";
+    const iconClass = isLight ? "fas fa-moon" : "fas fa-sun";
+
+    if (iconDesktop) iconDesktop.className = iconClass;
+    if (iconMobile) iconMobile.className = iconClass;
+  };
+
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  applyTheme(savedTheme);
+
+  const onToggle = () => {
+    const current = htmlEl.getAttribute("data-theme");
+    applyTheme(current === "dark" ? "light" : "dark");
+  };
+
+  themeToggleDesktop?.addEventListener("click", onToggle);
+  themeToggleMobile?.addEventListener("click", onToggle);
 });

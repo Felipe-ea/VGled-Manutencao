@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -35,16 +35,25 @@
           />
           <span class="brand-name gradient-text">VG Manutenção</span>
         </a>
-        <button
-          class="navbar-toggler d-lg-none"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#navbarOffcanvas"
-          aria-controls="navbarOffcanvas"
-          aria-label="Alternar menu"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="d-flex align-items-center gap-2 d-lg-none">
+          <button
+            id="theme-toggle-mobile"
+            class="theme-toggle-btn"
+            aria-label="Alternar modo claro/escuro"
+          >
+            <i class="fas fa-sun" id="theme-icon-mobile" aria-hidden="true"></i>
+          </button>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#navbarOffcanvas"
+            aria-controls="navbarOffcanvas"
+            aria-label="Alternar menu"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
         <!-- Desktop nav links (visíveis em telas >= lg) -->
         <ul class="navbar-nav ms-auto d-none d-lg-flex flex-row">
           <li class="nav-item">
@@ -63,6 +72,13 @@
             <a class="nav-link" href="#contato">Contato</a>
           </li>
         </ul>
+        <button
+          id="theme-toggle"
+          class="theme-toggle-btn ms-2 d-none d-lg-flex"
+          aria-label="Alternar modo claro/escuro"
+        >
+          <i class="fas fa-sun" id="theme-icon-desktop" aria-hidden="true"></i>
+        </button>
       </div>
     </nav>
 
