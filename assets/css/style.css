@@ -60,15 +60,11 @@ body::before {
 @keyframes glowIn {
   0% {
     opacity: 0;
-    transform: translateY(30px) scale(0.97) translateZ(0);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(-4px) scale(1.01) translateZ(0);
+    transform: translateY(20px) translateZ(0);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1) translateZ(0);
+    transform: translateY(0) translateZ(0);
   }
 }
 
@@ -182,11 +178,11 @@ body::before {
 @keyframes tiltIn {
   0% {
     opacity: 0;
-    transform: perspective(800px) rotateY(12deg) translateZ(-40px);
+    transform: translateY(10px) translateZ(0);
   }
   100% {
     opacity: 1;
-    transform: perspective(800px) rotateY(0) translateZ(0);
+    transform: translateY(0) translateZ(0);
   }
 }
 
@@ -740,18 +736,13 @@ section {
   border-radius: 18px;
   background: #ffffff;
   box-shadow: 0 20px 50px rgba(9, 18, 41, 0.08);
-  opacity: 0;
-  transform: translateY(30px) translateZ(0);
+  transform: translateZ(0);
   transition: all 0.6s ease;
-  will-change: transform, opacity;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .stat-item.visible {
   opacity: 1;
-  transform: translateY(0);
-  animation: glowIn 0.8s ease-out both;
+  transform: translateZ(0);
 }
 
 .stat-number {
@@ -780,18 +771,16 @@ section {
   box-shadow: 0 30px 60px rgba(2, 10, 32, 0.6);
   position: relative;
   overflow: hidden;
-  transition:
-    transform 0.35s ease,
-    border-color 0.35s ease;
-  will-change: transform;
   transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  will-change: transform;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .service-card:hover,
 .benefit-card:hover {
-  transform: translateY(-12px) translateZ(0);
+  transform: translateY(-8px) translateZ(0);
   border-color: rgba(10, 109, 255, 0.55);
 }
 
@@ -819,21 +808,6 @@ section {
 .benefit-card:hover::after {
   opacity: 1;
   animation: cardShimmer 2.2s ease-out forwards;
-}
-
-.service-card.visible,
-.benefit-card.visible {
-  animation: glowIn 0.85s ease-out both;
-}
-
-.col-lg-6:nth-child(odd) .service-card.visible,
-.col-lg-6:nth-child(odd) .benefit-card.visible {
-  animation: slideInLeft 0.8s ease-out both;
-}
-
-.col-lg-6:nth-child(even) .service-card.visible,
-.col-lg-6:nth-child(even) .benefit-card.visible {
-  animation: slideInRight 0.8s ease-out both;
 }
 
 .service-icon,
@@ -1034,14 +1008,11 @@ section {
   );
   border: 1px solid rgba(10, 109, 255, 0.2);
   box-shadow: 0 25px 60px rgba(9, 4, 34, 0.55);
-  opacity: 0;
-  transform: translateY(30px) translateZ(0);
+  transform: translateZ(0);
   transition: all 0.5s ease;
   position: relative;
   overflow: hidden;
-  will-change: transform, opacity;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .process-step::after {
@@ -1060,15 +1031,8 @@ section {
   opacity: 0;
 }
 
-.process-step.visible {
-  opacity: 1;
-  transform: translateY(0);
-  animation: tiltIn 0.75s ease-out both;
-}
-
 .process-step.visible::after {
-  animation: cardShimmer 1.6s ease-out;
-  opacity: 1;
+  opacity: 0; /* Remove shimmer */
 }
 
 .process-number {
@@ -1499,38 +1463,26 @@ section {
   }
 
   /* Otimizações de performance para mobile */
-  .service-card::after,
-  .benefit-card::after {
-    display: none; /* Remove efeito shimmer pesado em mobile */
+  .service-card,
+  .benefit-card {
+    backdrop-filter: none; /* Remove backdrop-filter pesado */
+    transition: border-color 0.2s ease; /* Simplifica transição */
   }
 
   .service-card:hover,
   .benefit-card:hover {
-    transform: translateY(-8px) translateZ(0); /* Reduz movimento no hover */
+    transform: none; /* Remove hover em mobile */
   }
 
-  /* Simplifica animações em mobile */
-  .service-card.visible,
-  .benefit-card.visible,
-  .process-step.visible {
-    animation-duration: 0.5s; /* Animações mais rápidas */
+  .service-card::after,
+  .benefit-card::after {
+    display: none; /* Remove efeito shimmer em mobile */
   }
 
-  /* Remove backdrop-filter pesado em dispositivos móveis */
-  .service-card,
-  .benefit-card {
-    backdrop-filter: none;
-  }
-
-  /* Desabilita animações pesadas de background em mobile */
+  /* Desabilita animações pesadas de background */
   .hero::before {
     animation: none;
-    filter: blur(40px); /* Reduz blur */
-  }
-
-  .hero-panel-image img {
-    animation: none;
-    transform: none;
+    filter: blur(30px); /* Reduz blur */
   }
 }
 
@@ -1560,7 +1512,7 @@ section {
   }
 }
 
-/* Otimizações de performance global */
+/* Respeita preferência de movimento reduzido do usuário */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

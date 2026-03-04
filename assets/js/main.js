@@ -35,8 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");
-        // Desconecta o elemento após animação para economizar recursos
-        inViewObserver.unobserve(entry.target);
       }
     });
   }, observerOptions);
