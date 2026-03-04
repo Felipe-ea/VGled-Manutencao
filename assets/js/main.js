@@ -1,10 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Função throttle para otimizar eventos de scroll
+  const throttle = (func, delay = 100) => {
+    let timeoutId;
+    let lastRan;
+    return function (...args) {
+      if (!lastRan) {
+        func.apply(this, args);
+        lastRan = Date.now();
+      } else {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          if (Date.now() - lastRan >= delay) {
+            func.apply(this, args);
+            lastRan = Date.now();
+          }
+        }, delay - (Date.now() - lastRan));
+      }
+    };
+  };
+
   const navbar = document.querySelector(".navbar");
   const toggleNavbarShadow = () => {
     navbar.classList.toggle("scrolled", window.scrollY > 50);
   };
   toggleNavbarShadow();
-  window.addEventListener("scroll", toggleNavbarShadow);
+  window.addEventListener("scroll", throttle(toggleNavbarShadow, 100), { passive: true });
 
   const observerOptions = {
     threshold: 0.15,
@@ -15,6 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");
+        // Desconecta o elemento após animação para economizar recursos
+        inViewObserver.unobserve(entry.target);
       }
     });
   }, observerOptions);
@@ -27,19 +49,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const animateCounter = (element, target, suffix = "+") => {
     const duration = 2000;
-    const frameTime = 16;
-    const increment = target / (duration / frameTime);
-    let current = 0;
+    const startTime = performance.now();
 
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        element.textContent = `${target}${suffix}`;
-        clearInterval(timer);
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const current = Math.floor(progress * target);
+
+      element.textContent = `${current}${suffix}`;
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
       } else {
-        element.textContent = `${Math.floor(current)}${suffix}`;
+        element.textContent = `${target}${suffix}`;
       }
-    }, frameTime);
+    };
+
+    requestAnimationFrame(animate);
   };
 
   const statsObserver = new IntersectionObserver(
@@ -131,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   highlightActiveLink();
-  window.addEventListener("scroll", highlightActiveLink);
+  window.addEventListener("scroll", throttle(highlightActiveLink, 150), { passive: true });
 
   const setStagger = (selector, step) => {
     document.querySelectorAll(selector).forEach((element, index) => {

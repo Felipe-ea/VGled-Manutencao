@@ -60,17 +60,15 @@ body::before {
 @keyframes glowIn {
   0% {
     opacity: 0;
-    transform: translateY(30px) scale(0.97);
-    filter: blur(6px);
+    transform: translateY(30px) scale(0.97) translateZ(0);
   }
   60% {
     opacity: 1;
-    transform: translateY(-4px) scale(1.01);
+    transform: translateY(-4px) scale(1.01) translateZ(0);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
+    transform: translateY(0) scale(1) translateZ(0);
   }
 }
 
@@ -743,8 +741,11 @@ section {
   background: #ffffff;
   box-shadow: 0 20px 50px rgba(9, 18, 41, 0.08);
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(30px) translateZ(0);
   transition: all 0.6s ease;
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .stat-item.visible {
@@ -782,11 +783,15 @@ section {
   transition:
     transform 0.35s ease,
     border-color 0.35s ease;
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .service-card:hover,
 .benefit-card:hover {
-  transform: translateY(-12px) perspective(800px) rotateY(-2deg);
+  transform: translateY(-12px) translateZ(0);
   border-color: rgba(10, 109, 255, 0.55);
 }
 
@@ -803,10 +808,11 @@ section {
     rgba(46, 208, 255, 0.35),
     rgba(76, 31, 147, 0.2)
   );
-  transform: translateX(-100%) rotate(20deg);
-  filter: blur(20px);
+  transform: translateX(-100%) rotate(20deg) translateZ(0);
+  filter: blur(10px);
   opacity: 0;
   pointer-events: none;
+  will-change: transform, opacity;
 }
 
 .service-card:hover::after,
@@ -1029,10 +1035,13 @@ section {
   border: 1px solid rgba(10, 109, 255, 0.2);
   box-shadow: 0 25px 60px rgba(9, 4, 34, 0.55);
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(30px) translateZ(0);
   transition: all 0.5s ease;
   position: relative;
   overflow: hidden;
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .process-step::after {
@@ -1488,6 +1497,41 @@ section {
   .neon-accordion-wrapper {
     padding: 2rem;
   }
+
+  /* Otimizações de performance para mobile */
+  .service-card::after,
+  .benefit-card::after {
+    display: none; /* Remove efeito shimmer pesado em mobile */
+  }
+
+  .service-card:hover,
+  .benefit-card:hover {
+    transform: translateY(-8px) translateZ(0); /* Reduz movimento no hover */
+  }
+
+  /* Simplifica animações em mobile */
+  .service-card.visible,
+  .benefit-card.visible,
+  .process-step.visible {
+    animation-duration: 0.5s; /* Animações mais rápidas */
+  }
+
+  /* Remove backdrop-filter pesado em dispositivos móveis */
+  .service-card,
+  .benefit-card {
+    backdrop-filter: none;
+  }
+
+  /* Desabilita animações pesadas de background em mobile */
+  .hero::before {
+    animation: none;
+    filter: blur(40px); /* Reduz blur */
+  }
+
+  .hero-panel-image img {
+    animation: none;
+    transform: none;
+  }
 }
 
 @media (max-width: 576px) {
@@ -1513,5 +1557,16 @@ section {
 
   .neon-accordion-wrapper {
     padding: 1.5rem;
+  }
+}
+
+/* Otimizações de performance global */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
